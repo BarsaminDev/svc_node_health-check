@@ -1,5 +1,10 @@
 require('dotenv').config();
 
+// rate limit middle ware
+const rateLimitMd = require('./middleware/rate-limit');
+// auth middle ware
+const auth = require('./middleware/auth');
+
 
 /**
  * 
@@ -26,34 +31,26 @@ const app = express();
  */
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(individualLocationWindowValidation);
-app.use(rateLimit);
-
-function rateLimit(req, res, next) {
-	console.log('rate limit');
-	next();
-}
-
-function individualLocationWindowValidation(req, res, next) {
-	console.log('individual location window validation');
-	next();
-}
+app.use(rateLimitMd.individualLocationWindowValidation);
+app.use(rateLimitMd.rateLimit);
 
 /**
  * 
  */
 let cache = {};
 
+
 /**
  * posts
  */
-app.post('/health', (req, res) => {
+app.post('/health', [auth.fooMiddleWare, auth.bar], (req, res) => {
 	console.log(req.body);
 	
 	res.send({
 		ok: true,
 		data: Math.random().toString(32)
 	});
+
 });
 
 
@@ -93,4 +90,4 @@ app.get('/user', (req, res) => {
 /**
  * 
  */
-app.listen(PORT, () => console.log(`HS is listening on port ${PORT}`))
+app.listen(PORT, () => console.log(`HS is listening on port ${PORT}`));

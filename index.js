@@ -5,7 +5,6 @@ const rateLimitMd = require('./middleware/rate-limit');
 // auth middle ware
 const auth = require('./middleware/auth');
 
-
 /**
  * 
  */
@@ -27,7 +26,7 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 /**
- * middle wares
+ * use middle wares
  */
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

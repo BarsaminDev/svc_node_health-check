@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....with openshift'
+                echo 'Deploying....with openshift develop'
             }
         }
     }

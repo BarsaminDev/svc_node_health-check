@@ -4,17 +4,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                sh 'echo Building..'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing##..'
+                sh 'echo Testing##..'
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....with openshift develop'
+                sh 'echo Deploying....with openshift develop'
                 sh 'npm --version'
             }
         }

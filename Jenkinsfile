@@ -15,6 +15,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....with openshift develop'
+                sh 'npm --version'
             }
         }
     }
